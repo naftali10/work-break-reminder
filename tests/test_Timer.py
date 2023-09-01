@@ -12,13 +12,11 @@ class TestTimer(unittest.TestCase):
     def test_wait_major(self):
         print("Do not press combination")
         time.sleep(1)
-        self.under_test.wait_major()
-        self.assertEqual("major done", self.under_test.status)
+        self.assertEqual("major done", self.under_test.wait_major())
 
     def test_wait_major_keybind(self):
         print("Please long press alt+f11")
-        self.under_test.wait_major()
-        self.assertEqual("major wait", self.under_test.status)
+        self.assertEqual("major reset", self.under_test.wait_major())
 
     def test_update_finish_hour(self):
         now = datetime.now()
@@ -31,8 +29,15 @@ class TestTimer(unittest.TestCase):
 
     def test_wait_before_popup_keybind(self):
         print("Please long press alt+f11")
-        self.under_test.wait_before_popup()
-        self.assertEqual("major wait", self.under_test.status)
+        self.assertEqual("major wait", self.under_test.wait_before_popup())
+
+    def test_wait_before_popup(self):
+        print("Do not press combination")
+        time.sleep(1)
+        self.assertEqual("popup done", self.under_test.wait_before_popup())
+
+    def test_wait_minor(self):
+        self.assertEqual("minor done", self.under_test.wait_minor())
 
 
 if __name__ == '__main__':

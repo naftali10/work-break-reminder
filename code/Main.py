@@ -10,7 +10,7 @@ class Main:
         self.beeper = Beeper()
         self.popup = Popup()
 
-        self.status: str = "inactive"
+        self.status: str = "start"
 
     def run(self):
         while True:
