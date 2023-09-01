@@ -8,7 +8,7 @@ class Main:
     def __init__(self, debug: bool = False):
         self.timer = Timer(debug=debug)
         self.beeper = Beeper()
-        self.popup = Popup()
+        self.popup = Popup(debug=debug)
 
         self.status: str = "start"
 

@@ -13,7 +13,7 @@ class Timer:
         self.remaining_time: timedelta = timedelta(seconds=0)
         self.finish_hour: datetime = datetime.now()
         self.sleep_interval: float = 0.5
-        self.reset_key = 'alt+f11'
+        self.reset_key = "alt+f11" if debug else "alt+f12"
 
         self.status: str = "inactive"
 
