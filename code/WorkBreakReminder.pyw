@@ -73,7 +73,7 @@ def show_notification():
     root.mainloop()
 
 
-def timer(end_time = None):
+def timer(end_time=None):
     if end_time is None:
         end_time = datetime.now() + duration
     did_beep = False
