@@ -8,7 +8,8 @@ class Timer:
     def __init__(self, debug: bool = False):
         self.major_timeout: timedelta = timedelta(seconds=5) if debug else timedelta(minutes=60)
         self.minor_timeout: timedelta = timedelta(seconds=2) if debug else timedelta(minutes=3)
-        self.popup_timeout: timedelta = timedelta(seconds=2) if debug else timedelta(seconds=20)
+        self.popup_timeout: timedelta = timedelta(seconds=9) if debug else timedelta(seconds=20)
+        self.break_timeout: timedelta = timedelta(seconds=2) if debug else timedelta(minutes=3)
 
         self.remaining_time: timedelta = timedelta(seconds=0)
         self.finish_hour: datetime = datetime.now()
@@ -49,3 +50,10 @@ class Timer:
                 return "major wait"
             time.sleep(self.sleep_interval)
         return "popup done"
+
+    def wait_break(self):
+        self.update_finish_hour(self.break_timeout)
+        while datetime.now() < self.finish_hour:
+            self.update_remaining_time()
+            time.sleep(self.sleep_interval)
+        return "break done"
