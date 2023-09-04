@@ -13,9 +13,9 @@ class TestMain(unittest.TestCase):
               "\tMajor wait = 5 seconds\n"
               "\tMinor wait = 2 seconds\n"
               "\tBeeps to popup interval = 2 seconds\n"
-              "\tRepop interval = 10 seconds\n"
-              "Click Kill when you're done")
-        with self.assertRaises(RuntimeError):
+              "\tRepop interval = 9 seconds\n"
+              "\tBreak interval = 2 seconds\n")
+        with self.assertRaises(SystemExit):
             self.under_test.run()
 
 

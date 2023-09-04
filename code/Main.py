@@ -14,16 +14,23 @@ class Main:
 
     def run(self):
         while True:
-            self.major_loop()
+            self.major_reset_loop()
             self.transition_to_popup()
+            while True:
+                if self.status == "break wait":
+                    self.wait_break_and_popup()
+                    if self.status == "major wait":
+                        break
+                elif self.status == "minor wait":
+                    self.minor_loop()
+                else:
+                    raise ValueError(f"Unexpected status: {self.status}")
             if self.status == "major wait":
                 continue
-            elif self.status == "minor wait":
-                self.minor_loop()
             else:
-                raise RuntimeError(f"Unexpected status: {self.status}")
+                raise ValueError(f"Unexpected status: {self.status}")
 
-    def major_loop(self):
+    def major_reset_loop(self):
         while True:
             self.status = self.timer.wait_major()
             if self.status == "major reset":
@@ -38,7 +45,15 @@ class Main:
             if self.status != "minor wait":
                 break
 
+    def wait_break_and_popup(self):
+        self.timer.wait_break()
+        try:
+            print("showing post break")
+            self.status = self.popup.show_post_break()
+        except RuntimeError:
+            print("Runtime error detected")
+
     def transition_to_popup(self):
         self.beeper.alert_upcoming_popup()
         self.timer.wait_before_popup()
-        self.status = self.popup.show()
+        self.status = self.popup.show_pre_break()
