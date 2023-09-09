@@ -56,4 +56,4 @@ class Main:
     def transition_to_popup(self):
         self.beeper.alert_upcoming_popup()
         self.timer.wait_before_popup()
-        self.status = self.popup.show_pre_break()
+        self.status = self.popup.show()
