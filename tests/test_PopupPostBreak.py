@@ -23,10 +23,9 @@ class TestPopupPreBreak(unittest.TestCase):
 
     def test_show_loop_to_pre(self):
         print("Take your time\n"
-              "Click on No, verify pre-break loop, then kill.")
-        with self.assertRaises(SystemExit):
-            self.under_test.show()
-        self.assertTrue(self.under_test.status in ["inactive", "repop"])
+              "Click on No.")
+        self.under_test.show()
+        self.assertEqual("pre break", self.under_test.status)
 
 
 if __name__ == '__main__':

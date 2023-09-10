@@ -8,7 +8,7 @@ class Timer:
     def __init__(self, debug: bool = False):
         self.major_timeout: timedelta = timedelta(seconds=5) if debug else timedelta(minutes=60)
         self.minor_timeout: timedelta = timedelta(seconds=2) if debug else timedelta(minutes=3)
-        self.popup_timeout: timedelta = timedelta(seconds=9) if debug else timedelta(seconds=20)
+        self.popup_timeout: timedelta = timedelta(seconds=2) if debug else timedelta(seconds=20)
         self.break_timeout: timedelta = timedelta(seconds=2) if debug else timedelta(minutes=3)
 
         self.remaining_time: timedelta = timedelta(seconds=0)

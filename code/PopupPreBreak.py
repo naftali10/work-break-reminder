@@ -6,11 +6,11 @@ from Content import Content
 class PopupPreBreak(Popup):
 
     def __init__(self, debug: bool = False):
-        super().__init__(debug)
+        super().__init__(size="400x180", debug=debug)
         self.content = Content()
 
     def configure_window(self):
-        self.basic_configuration(content=self.content_made)
+        self.basic_configuration()
         self.add_button(text="Start break", command=self.start_break)
         self.add_button(text="Postpone for 3 minutes", command=self.postpone)
         if self.debug:
@@ -26,14 +26,14 @@ class PopupPreBreak(Popup):
         self.status = "break wait"
 
     def show(self):
-        if self.status != "repop":
-            self.make_content()
-        super().show()
+        if not self.status in ["repop", "minor wait"]:
+            self.new_labels()
+        return super().show()
 
-    def make_content(self):
-        tip = self.content.randomize_tip()
+    def new_labels(self):
         motivation = self.content.randomize_motivation()
-        self.content_made = [
-            tkinter.Label(text=motivation, justify="center"),
-            tkinter.Label(text=tip, justify="left", wraplength=350)
+        tip = "Activity suggestion:\n" + self.content.randomize_tip()
+        self.labels = [
+            (motivation, "center", 'n'),
+            (tip, "left", 'w')
         ]

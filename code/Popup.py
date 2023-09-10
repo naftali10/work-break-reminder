@@ -3,33 +3,36 @@ import tkinter
 
 class Popup:
 
-    def __init__(self, debug: bool = False):
+    def __init__(self, size: str = "400x150", debug: bool = False):
+        self.size: str = size
         self.debug: bool = debug
         self.root: tkinter.Tk = None
         self.status: str = "inactive"
         self.repop_timeout_ms: int = (10 if debug else 60) * 1000
+        self.labels: [(str, str)] = [("Test", "center", 'n')] if debug else [("Take a break!", "center", 'n')]
 
     def configure_window(self):
-        self.basic_configuration(content=[tkinter.Label(text="Test")])
+        self.basic_configuration()
         if self.debug:
             self.add_button(text="Kill", command=self.kill)
         self.root.after(ms=self.repop_timeout_ms, func=self.repop)
 
-    def basic_configuration(self, content: [tkinter.Label]):
+    def basic_configuration(self):
         self.root.title("Work Break Reminder")
-        self.root.geometry("400x150")
+        self.root.geometry(self.size)
         self.root.attributes("-topmost", True)
         self.root.protocol("WM_DELETE_WINDOW", self.do_nothing)
 
-        for cont in self.content_made:
-            cont.pack(pady=20)
+        for (text, justify, align) in self.labels:
+            label = tkinter.Label(master=self.root, text=text, justify=justify, wraplength=350)
+            label.pack(anchor=align, padx=10, pady=5)
 
-        self.button_frame = tkinter.Frame(self.root)
-        self.button_frame.pack(side=tkinter.TOP, pady=20)
+        self.button_frame = tkinter.Frame(master=self.root)
+        self.button_frame.pack(pady=20)
 
     def add_button(self, text: str, command: {}):
         button = tkinter.Button(
-            self.button_frame,
+            master=self.button_frame,
             text=text,
             command=command
         )

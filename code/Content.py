@@ -4,31 +4,45 @@ class Content:
     def __init__(self):
         self.tips_link = "https://www.notion.so/naftali10/Work-Breaks-d8623d5316a34621b26f4adef23e4137"
         self.tips = [
-            "Keep your shoulder healthy and strong with physiotherapy exercises, "
+            "Keep your shoulder healthy and strong\n"
+            "with physiotherapy exercises,\n"
             "to reduce the risk of another dislocation.",
 
-            "Go down the stairs a few floors and back up, "
+            "\n"
+            "Go down the stairs a few floors and back up,\n"
             "for some cardio activity.",
 
-            "Stretch your muscles: front leg, back arm, chest, and more.",
+            "\n"
+            "Stretch your muscles:\n"
+            "Front leg, back arm, chest, and more.",
 
-            "Warm up your joints, to lubricate tissues and reduce stiffness of the body.",
+            "\n"
+            "Warm up your joints, to lubricate tissues\n"
+            "and reduce stiffness of the body.",
 
-            "Apply focused pressure using a tennis ball to points in your "
-            "neck, chest, shoulder blades, below the arm pits. "
+            "Apply focused pressure using a tennis ball to points in your\n"
+            "neck, chest, shoulder blades, below the arm pits.\n"
             "Breath into it for a minute or two, until the pain is gone.",
 
-            "Practice yoga by doing "
-            "The Worlds Greatest Stretch, Front Growing Stretch, and Small Bridge.",
+            "Practice yoga by doing\n"
+            "The Worlds Greatest Stretch, Front Growing Stretch,\n"
+            "and Small Bridge.",
 
-            "Perform strength workout to get in shape: "
-            "lift weights with front arm, swing weights with shoulders, do squats and push ups.",
+            "Perform strength workout to get in shape:\n"
+            "lift weights with front arm, swing weights with shoulders,\n"
+            "do squats and push ups.",
 
-            "Listen to music that you love, and dance if it feels right.",
+            "\n"
+            "Listen to music that you love,\n"
+            "and dance if it feels right.",
 
-            "Play the guitar",
+            "\n"
+            "Play the guitar and sing along.\n"
+            "Enjoy your voice in the world.",
 
-            "Socialize with friends, family, team members and other colleagues"
+            "\n"
+            "Socialize with friends, family,\n"
+            "team members, and other colleagues"
         ]
         self.motivations = [
             "Time for a context switch to zoom out and get new perspective.",

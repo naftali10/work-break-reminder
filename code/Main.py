@@ -1,6 +1,7 @@
 from Timer import Timer
 from Beeper import Beeper
-from Popup import Popup
+from PopupPreBreak import PopupPreBreak
+from PopupPostBreak import PopupPostBreak
 
 
 class Main:
@@ -8,7 +9,8 @@ class Main:
     def __init__(self, debug: bool = False):
         self.timer = Timer(debug=debug)
         self.beeper = Beeper()
-        self.popup = Popup(debug=debug)
+        self.popup_pre_break = PopupPreBreak(debug=debug)
+        self.popup_post_break = PopupPostBreak(debug=debug)
 
         self.status: str = "start"
 
@@ -19,6 +21,8 @@ class Main:
             while True:
                 if self.status == "break wait":
                     self.wait_break_and_popup()
+                    if self.status == "pre break":
+                        self.status = self.popup_pre_break.show()
                     if self.status == "major wait":
                         break
                 elif self.status == "minor wait":
@@ -47,13 +51,10 @@ class Main:
 
     def wait_break_and_popup(self):
         self.timer.wait_break()
-        try:
-            print("showing post break")
-            self.status = self.popup.show_post_break()
-        except RuntimeError:
-            print("Runtime error detected")
+        self.status = self.popup_post_break.show()
 
     def transition_to_popup(self):
         self.beeper.alert_upcoming_popup()
         self.timer.wait_before_popup()
-        self.status = self.popup.show()
+        self.status = self.popup_pre_break.show()
+
