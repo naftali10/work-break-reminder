@@ -53,8 +53,8 @@ class Content:
             "Time to step away and come back fresh.",
             "Time to reset and make mindful choices for the rest of the day.",
             "Time for a mini-vacation, because work is not the goal of life.",
-            "Time to re-oil the machine in you, and increase productivity",
-            "Time for self-care, to have more satisfaction from this day"
+            "Time to re-oil the machine in you, and increase productivity.",
+            "Time for self-care, to have more satisfaction from this day."
         ]
 
     def randomize_motivation(self) -> str:
