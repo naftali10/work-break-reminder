@@ -12,6 +12,7 @@ class TestMain(unittest.TestCase):
               "Times to expect:\n"
               "\tMajor wait = 5 seconds\n"
               "\tMinor wait = 2 seconds\n"
+              "\tMedium wait = 2 seconds\n"
               "\tBeeps to popup interval = 2 seconds\n"
               "\tRepop interval = 9 seconds\n"
               "\tBreak interval = 2 seconds\n")

@@ -1,5 +1,5 @@
 import tkinter
-
+import tkinter.font as tkFont
 
 class Popup:
 
@@ -9,7 +9,9 @@ class Popup:
         self.root: tkinter.Tk = None
         self.status: str = "inactive"
         self.repop_timeout_ms: int = (10 if debug else 60) * 1000
-        self.labels: [(str, str)] = [("Test", "center", 'n')] if debug else [("Take a break!", "center", 'n')]
+        self.labels: [(str, str, str, str)] = \
+            [("Test", "center", 'n', "normal")] if debug \
+            else [("Take a break!", "center", 'n', "normal")]
 
     def configure_window(self):
         self.basic_configuration()
@@ -18,14 +20,19 @@ class Popup:
         self.root.after(ms=self.repop_timeout_ms, func=self.repop)
 
     def basic_configuration(self):
-        self.root.title("Work Break Reminder")
+        self.root.title("Wellness Time Reminder")
         self.root.geometry(self.size)
         self.root.attributes("-topmost", True)
         self.root.protocol("WM_DELETE_WINDOW", self.do_nothing)
 
-        for (text, justify, align) in self.labels:
-            label = tkinter.Label(master=self.root, text=text, justify=justify, wraplength=350)
-            label.pack(anchor=align, padx=10, pady=5)
+        for (text, justify, align, weight) in self.labels:
+            label = tkinter.Label(
+                master=self.root,
+                text=text,
+                justify=justify,
+                wraplength=400,
+                font=tkFont.Font(family="Segoe UI", size=9, weight=weight))
+            label.pack(anchor=align, padx=20, pady=5)
 
         self.button_frame = tkinter.Frame(master=self.root)
         self.button_frame.pack(pady=20)

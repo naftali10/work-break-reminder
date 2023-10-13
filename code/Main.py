@@ -25,8 +25,8 @@ class Main:
                         self.status = self.popup_pre_break.show()
                     if self.status == "major wait":
                         break
-                elif self.status == "minor wait":
-                    self.minor_loop()
+                elif self.status in ["minor wait", "medium wait"]:
+                    self.minor_medium_loop()
                 else:
                     raise ValueError(f"Unexpected status: {self.status}")
             if self.status == "major wait":
@@ -42,11 +42,14 @@ class Main:
             else:
                 break
 
-    def minor_loop(self):
+    def minor_medium_loop(self):
         while True:
-            self.timer.wait_minor()
+            if self.status == "minor wait":
+                self.timer.wait_minor()
+            elif self.status == "medium wait":
+                self.timer.wait_medium()
             self.transition_to_popup()
-            if self.status != "minor wait":
+            if self.status not in ["minor wait", "medium wait"]:
                 break
 
     def wait_break_and_popup(self):
