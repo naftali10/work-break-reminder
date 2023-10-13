@@ -13,11 +13,17 @@ class TestPopup(unittest.TestCase):
         self.under_test.show()
         self.assertEqual("break wait", self.under_test.status)
 
-    def test_show_postpone(self):
+    def test_show_postpone_minor(self):
         print("Take your time\n"
-              "Click on postpone")
+              "Click on postpone for 3")
         self.under_test.show()
         self.assertEqual("minor wait", self.under_test.status)
+
+    def test_show_postpone_medium(self):
+        print("Take your time\n"
+              "Click on postpone for 30")
+        self.under_test.show()
+        self.assertEqual("medium wait", self.under_test.status)
 
     def test_repop(self):
         print("Ignore window to verify repop.\n"

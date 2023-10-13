@@ -41,6 +41,9 @@ class TestTimer(unittest.TestCase):
     def test_wait_minor(self):
         self.assertEqual("minor done", self.under_test.wait_minor())
 
+    def test_wait_medium(self):
+        self.assertEqual("medium done", self.under_test.wait_medium())
+
     def test_wait_break(self):
         self.assertEqual("break done", self.under_test.wait_break())
 
