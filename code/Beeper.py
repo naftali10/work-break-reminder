@@ -1,5 +1,5 @@
 import time
-import pyaudio
+import sounddevice
 import numpy as np
 
 
@@ -7,21 +7,12 @@ class Beeper:
 
     def __init__(self):
         self.frequency: int = 1500
-        self.single_beep_duration: float = 0.75
-        self.audio = pyaudio.PyAudio()
+        self.single_beep_duration: float = 0.4
+        self.wave = self.make_sine_wave()
 
     def beep(self) -> None:
-        wave = self.make_sine_wave()
         try:
-            stream = self.audio.open(
-                format=pyaudio.paFloat32,
-                channels=1,
-                rate=48000,
-                output=True,
-                output_device_index=self.get_speaker_index()
-            )
-            stream.write(wave)
-            stream.close()
+            sounddevice.play(data=self.wave, samplerate=48000, device=self.get_speaker_index(),blocking=True)
         except RuntimeError as e:
             raise RuntimeError(f"Beeper Error: {e}")
 
@@ -32,11 +23,10 @@ class Beeper:
 
     def get_speaker_index(self) -> int:
         device_name = "Speakers (Realtek(R) Audio)"
-        for i in range(self.audio.get_device_count()):
-            device_info = self.audio.get_device_info_by_index(i)
-            if device_info["name"] == device_name:
-                device_index = i
-                return device_index
+        device_list = sounddevice.query_devices()
+        for device in device_list:
+            if device["name"] == device_name:
+                return device["index"]
         raise RuntimeError(f"Failed to find audio device '{device_name}'")
 
     def beep_twice(self):

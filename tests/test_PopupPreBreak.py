@@ -21,7 +21,7 @@ class TestPopup(unittest.TestCase):
 
     def test_show_postpone_medium(self):
         print("Take your time\n"
-              "Click on postpone for 30")
+              "Click on postpone for 20")
         self.under_test.show()
         self.assertEqual("medium wait", self.under_test.status)
 
