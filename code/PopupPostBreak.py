@@ -8,7 +8,7 @@ class PopupPostBreak(Popup):
         super().__init__(size="450x100" if debug else "400x100", debug=debug)
 
     def configure_window(self):
-        self.labels = [("Did you perform the wellness activity?", "center", 'n', "bold")]
+        self.labels = [("Did you perform the wellness activity?", "center", 'n', "bold", 9)]
         self.basic_configuration()
         self.add_button(text="Yes, I did", command=self.dismiss)
         self.add_button(text="Not really", command=self.loop_to_pre)

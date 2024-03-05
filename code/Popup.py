@@ -9,9 +9,9 @@ class Popup:
         self.root: tkinter.Tk = None
         self.status: str = "inactive"
         self.repop_timeout_ms: int = (10 if debug else 60) * 1000
-        self.labels: [(str, str, str, str)] = \
-            [("Test", "center", 'n', "normal")] if debug \
-            else [("Take a break!", "center", 'n', "normal")]
+        self.labels: [(str, str, str, str, int)] = \
+            [("Test", "center", 'n', "normal", 9)] if debug \
+            else [("Take a break!", "center", 'n', "normal", 9)]
 
     def configure_window(self):
         self.basic_configuration()
@@ -25,13 +25,13 @@ class Popup:
         self.root.attributes("-topmost", True)
         self.root.protocol("WM_DELETE_WINDOW", self.do_nothing)
 
-        for (text, justify, align, weight) in self.labels:
+        for (text, justify, align, weight, size) in self.labels:
             label = tkinter.Label(
                 master=self.root,
                 text=text,
                 justify=justify,
-                wraplength=400,
-                font=tkFont.Font(family="Segoe UI", size=9, weight=weight))
+                wraplength=600,
+                font=tkFont.Font(family="Segoe UI", size=size, weight=weight))
             label.pack(anchor=align, padx=20, pady=5)
 
         self.button_frame = tkinter.Frame(master=self.root)
@@ -45,7 +45,7 @@ class Popup:
         )
         button.pack(
             side=tkinter.LEFT,
-            padx=10
+            padx=20
         )
 
     def kill(self):
