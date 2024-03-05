@@ -6,7 +6,7 @@ from Content import Content
 class PopupPreBreak(Popup):
 
     def __init__(self, debug: bool = False):
-        super().__init__(size="425x180", debug=debug)
+        super().__init__(size="550x200", debug=debug)
         self.content = Content()
         self.postpone: int = 3
 
@@ -40,6 +40,6 @@ class PopupPreBreak(Popup):
         motivation = self.content.randomize_motivation()
         tip = "Activity suggestion:\n" + self.content.randomize_tip()
         self.labels = [
-            (motivation, "center", 'n', "bold"),
-            (tip, "left", 'w', "normal")
+            (motivation, "center", 'n', "bold", 12),
+            (tip, "left", 'w', "normal", 9)
         ]
